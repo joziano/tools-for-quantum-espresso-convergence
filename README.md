@@ -14,7 +14,7 @@
    
 **4.** **After control.in configuration, the convergence.sh should be run in the Linux terminal as:** 
       
-      bash pdos-sum.sh
+      bash convergence.sh
 
 **5.** **Control.in parameters informations: logical and string variables**
                                                      
