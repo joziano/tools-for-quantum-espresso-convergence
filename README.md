@@ -1,3 +1,8 @@
+# Please, when using this tool, cite:
+
+J. R. M. Monteiro, & Henrique Pecinatto. (2022). convergence.sh/tools-for-quantum-espresso (v1.0). Zenodo. https://doi.org/10.5281/zenodo.7316945
+
+
 # convergence.sh 
 
 **1.** **convergence.sh is an auxiliary tool for Linux Quantum Espresso users**. 
