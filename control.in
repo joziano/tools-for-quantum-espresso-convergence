@@ -1,0 +1,116 @@
+&quantumEspressoCommand
+
+mpirun -np 4 /home/joziano/qe-6.8/bin/pw.x
+
+/
+&convergenceTestOption
+
+kpoints = .true.
+ecutwfc = .false.  
+               
+/
+&kpoints  
+
+kmeshDim(a,b,c)=(1,1,1)
+kmeshBehavior=(k1[VAR],k2[VAR],k3[VAR])
+loopKp(start,step,end)=(2,1,4)
+  
+/
+&ecutwfc 
+
+loopEcutwfc(start,step,end)=(40,10,60)  
+
+########################################################################
+#[1] Informations:                                                     #
+########################################################################
+#                                                                      #
+#  Terminal execution: bash convergence.sh                             #
+#  Is accepted .TRUE. or .true. and .FALSE. or .false.                 #
+#  Is accepted VAR or var and FIX or fix                               #
+#  k-point syntax: k1, k2, k3 (lowercase)                              #
+#                                                                      #
+########################################################################
+#[2] &quantumEspressoCommand                                           #
+########################################################################
+#                                                                      #
+#  Quantum espresso Command Path configuration                         #
+#                                                                      #
+########################################################################
+#[3] &convergenceTestOption                                            #
+########################################################################
+#                                                                      #
+#  Attention, here, the kpoints and ecutwfc convergence test are       #
+#  mutually exclusive.                                                 #
+#  Possible configuration: kpoints=.TRUE. and ecutwfc=.FALSE. or       #
+#  kpoints=.FALSE. and ecutwfc=.TRUE.                                  #
+#                                                                      #
+########################################################################
+#[4] &kpoints                                                          #
+########################################################################
+#                                                                      #
+#  Configuration required only if kpoints=.TRUE. and                   #
+#  ecutwfc=.FALSE., otherwise it is ignored.                           #
+#                                                                      #
+########################################################################
+#[5] &ecutwfc                                                          #
+########################################################################
+#                                                                      #
+#  Configuration required only if if ecutwfc=.TRUE. and                #
+#  kpoints=.FALSE., otherwise it is ignored.                           #
+#                                                                      #
+########################################################################
+#[6] kmeshDim(a,b,c)=(Mk1,Mk2,Mk3)                                     #
+########################################################################
+#                                                                      #
+#  Mk1, Mk2 and Mk3 are related to crystal dimensions in reciprocal    #
+#  space. If, for example, the crystal is cubic, the a, b and c        #
+#  dimensions are equal and we can set kmeshDim(a,b,c)=(1,1,1).        #
+#  If, for example, the crystal have equal a and b dimensions, but a   #
+#  and b are twice the size of c, we can set kmeshDim=(2,2,1).         #
+#                                                                      #
+########################################################################
+#[7] kmeshBehavior=(k1[OPTION],k2[OPTION],k3[OPTION])                  #
+########################################################################
+#                                                                      #
+#  Possible configuration: OPTION=VAR or OPTION=FIX                    #
+#                                                                      #
+#  If OPTION=VAR, the correspondent k-point (k1, k2 or k3) is given    #
+#  according to [8].                                                   #
+#                                                                      #
+#  If OPTION=FIX, it is necessary to specify the fixed value.          #
+#  for example, if throughout the k-point convergence test we want     #
+#  to keep k3 fixed and equal to 2, we must set:                       #
+#                                                                      #
+#  kmeshBehavior=(k1[VAR],k2[VAR],k3[FIX])                             #
+#  k3[FIX]=2                                                           #
+#                                                                      #
+#  If throughout the k-point convergence test we want to keep k1       #
+#  and k2 fixed and equal to 1, we must set:                           #
+#                                                                      #
+#  kmeshBehavior=(k1[FIX],k2[FIX],k3[VAR])                             #
+#  k1[FIX]=1                                                           #
+#  k2[FIX]=1                                                           #
+#                                                                      #
+########################################################################
+#[8] loopKp(start,step,end)=(STARTKP,STEPKP,ENDKP)                     #
+########################################################################
+#                                                                      #
+#  loopKp(start,step,end) variable control the loop of k-points mesh.  #
+#  The k1, k2 and k3 k-points, from scf calculation are given by the   #
+#  relation: k1=Mk1*KP, k2=Mk2*KP, and k3=Mk3*KP, for KP from          #
+#  sequence STARTKP,STEPKP,ENDKP. If, for example, is set              #
+#  kmeshDim(a,b,c)=(2,2,1) and loopKp(start,step,end)=(2,1,6),         #
+#  k-point mesh will be run in scf calculation as: 4x4x2, 6x6x3, 8x8x4,#
+#  10x10x5 12x12x6. If, for example, is set kmeshDim(a,b,c)=(1,1,1)    #
+#  and loopKp(start,step,end)=(2,2,8), k-points will be run in scf     #
+#  calculation as: 2x2x2, 4x4x4, 6x6x6, and 8x8x8.                     #
+#                                                                      #
+########################################################################
+#[9] loopEcutwfc(start,step,end)=(STARTECUT,STEPECUT,ENDECUT)          #
+########################################################################
+#  loopEcutwfc(start,step,end) variable control the loop of ecutwfc.   #
+#  If, for example, is set loopEcutwfc(start,step,end)=(40,10,80)      #
+#  ecutwfc will be run in scf calculation as: 40, 50, 60, 70, 80 Ry.   #
+#  If, for example, is set loopEcutwfc(start,step,end)=(60,20,120)     #
+#  ecutwfc will be run in scf calculation as: 60, 80, 100, 120 Ry.     #
+########################################################################
